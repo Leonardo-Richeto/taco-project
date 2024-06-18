@@ -11,13 +11,12 @@ import { taco } from '../../assets/taco.js'
 import { IoIosArrowDown } from "react-icons/io";
 
 import { editedCalculation } from "../../utils/calculations";
-import { handleKeyDown, handleVerifyWeight } from "../../utils/formatting";
 
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 export function Ranking(){
-  const { weight, setWeight } = useContext(GlobalContext)
+  const { weight } = useContext(GlobalContext)
 
   const [ordenedList, setOrdenedList] = useState([])
   const [emphasis, setEmphasis] = useState('kcal')
@@ -41,12 +40,6 @@ export function Ranking(){
     setOrdenedList(ordenedFoods)
   }
 
-  function handleChangeWeight(e){
-    const result = handleVerifyWeight(e)
-    
-    setWeight(result)
-  }
-
   useEffect(() => {
     const key = document.querySelector('.select')
     
@@ -57,51 +50,48 @@ export function Ranking(){
     <Container>
         <Header />
 
-        <h1>CONSULTA NUTRICIONAL</h1>
+        <h1>Ranking dos alimentos</h1>
 
     <Section className="section-select">
-
-      <p>Ordenar por</p>
+      <span>
+        <p>Ordenar por</p>
         <select
         name="select"
         className="select"
         defaultValue="kcal"
         onChange={e => handleOrder(e.target.value)}
         >
-            <option value="kcal">Valor energético</option>
-            <option value="proteina">Proteína</option>
-            <option value="carboidrato">Carboidrato</option>
-            <option value="gordura">Gordura</option>
-            <option value="fibra">Fibras</option>
-            <option value="colesterol">Colesterol</option>
-            <option value="fosforo">Fósforo</option>
-            <option value="ferro">Ferro</option>
-            <option value="sodio">Sódio</option>
-            <option value="potassio">Potássio</option>
-            <option value="calcio">Cálcio</option>
-            <option value="vitc">Vitamina C</option>
-            <option value="magnesio">Magnésio</option>
-            <option value="manganes">Manganês</option>
-            <option value="cobre">Cobre</option>
-            <option value="zinco">Zinco</option>
-            <option value="retinol">Retinol</option>
-            <option value="tiamina">Tiamina</option>
-            <option value="riboflavina">Riboflavina</option>
-            <option value="piridoxina">Piridoxina</option>
-            <option value="niacina">Niacina</option>
+          <option value="kcal">Valor energético</option>
+          <option value="proteina">Proteína</option>
+          <option value="carboidrato">Carboidrato</option>
+          <option value="gordura">Gordura</option>
+          <option value="fibra">Fibras</option>
+          <option value="colesterol">Colesterol</option>
+          <option value="fosforo">Fósforo</option>
+          <option value="ferro">Ferro</option>
+          <option value="sodio">Sódio</option>
+          <option value="potassio">Potássio</option>
+          <option value="calcio">Cálcio</option>
+          <option value="vitc">Vitamina C</option>
+          <option value="magnesio">Magnésio</option>
+          <option value="manganes">Manganês</option>
+          <option value="cobre">Cobre</option>
+          <option value="zinco">Zinco</option>
+          <option value="retinol">Retinol</option>
+          <option value="tiamina">Tiamina</option>
+          <option value="riboflavina">Riboflavina</option>
+          <option value="piridoxina">Piridoxina</option>
+          <option value="niacina">Niacina</option>
         </select>
-
-        <InputWeight
-        onKeyDown={e => handleKeyDown(e)}
-        onChange={e => handleChangeWeight(e)}
-        />
+      </span>
+      <InputWeight />
 
     </Section>
 
     <Section>
         {
             ordenedList.length === 0 ? taco.map((food, index) => {
-              if(index < currentPage * 20){
+              if(index < currentPage * 5){
                 return <FullCard
                 rank={index + 1}
                 key={index}
@@ -113,7 +103,7 @@ export function Ranking(){
             })
             :
             ordenedList.map((food, index) => {
-              if (index < currentPage * 20) {
+              if (index < currentPage * 5) {
                 return <FullCard
                 rank={index + 1}
                 key={index}
@@ -127,16 +117,16 @@ export function Ranking(){
         
     </Section>
 
-          <Button
-          onClick={loadNextPage}
-          title="Carregar mais..."
-          />
-        <span>
-          <Button 
-          title={<IoIosArrowDown />}
-          onClick={loadNextPage}
-          />
-        </span>
+      <span className="buttons">
+        <Button
+        onClick={loadNextPage}
+        title="Carregar mais..."
+        />
+        <Button 
+        title={<IoIosArrowDown />}
+        onClick={loadNextPage}
+        />
+      </span>
         
     <Footer />
 

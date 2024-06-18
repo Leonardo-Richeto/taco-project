@@ -1,66 +1,89 @@
 import { InputText } from "../../components/InputText";
-import { Container } from "./styles";
-import { Header } from "../../components/Header"
-import { Footer } from "../../components/Footer"
+import { Container, Form,Background } from "./styles";
 import { Button } from "../../components/Button"
-import { Section } from "../../components/Section"
-import { TfiEmail } from "react-icons/tfi";
-import { RiLockPasswordLine } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { GiFruitBowl } from "react-icons/gi";
-
-
+import { FiMail, FiLock } from "react-icons/fi"
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 export function SignIn(){
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+
+    const { signIn } = useAuth()
+    const navigate = useNavigate()
+
+    async function handleSignIn(){
+        if(!email && !password) return toast.warn("Preencha todos os campos.")
+
+        try {
+            await signIn({ email, password })
+            navigate("/")
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
+
+    function verifyEnter(e){
+        if(e.key === 'Enter') handleSignIn()
+    }
+
     return(
         <Container>
 
-            <Header />
+        <ToastContainer
+        position="bottom-right" 
+        />
 
-            <Section>
-                <div>
-                    <h1>Não é membro?</h1>
+        <Background />
 
-                    <div className="info">
-                        <p>Crie sua conta e monte dietas completas.</p>
-                        <p>Salve e altere suas refeições.</p>
-                        <GiFruitBowl />
-                    </div>
-                <Link className="register" to="/register">Criar Conta</Link>
-                </div>
+        <Form action="">
 
-                <div>
-                    <FaUser className="user" />
-                    <form action="">
-                    
-                        <InputText
-                        className="input"
-                        icon={<TfiEmail />}
-                        placeholder="E-mail..."
-                        />
-
-                        <InputText
-                        className="input"
-                        icon={<RiLockPasswordLine />}
-                        placeholder="Senha..."
-                        />
-                    
-                    <Button
-                    className="login-button"
-                    title="Login"
-                    />
-
-                    </form>
-
-                    <Link className="forgot">Esqueci minha senha!</Link>
-
-                </div>
-
-            </Section>
-
-            <Footer />
+            <h1>Login</h1>
             
+            <Link to="/" className="back">
+                <FaArrowLeftLong /> Voltar ao início
+            </Link>
+
+            <FaUser className="user" />
+            <InputText
+            className="input"
+            icon={<FiMail />}
+            placeholder="E-mail..."
+            type="email"
+            onChange={e => setEmail(e.target.value)}
+            onKeyPress={e => verifyEnter(e)}
+            autoFocus
+            />
+
+            <InputText
+            className="input"
+            icon={<FiLock />}
+            placeholder="Senha..."
+            type="password"
+            onChange={e => setPassword(e.target.value)}
+            onKeyPress={e => verifyEnter(e)}
+            />
+        
+            <Button
+            title="Entrar"
+            onClick={handleSignIn}
+            />
+
+            <div className="links">
+                <Link className="register" to="/register">Criar Conta</Link>
+    
+                <Link className="forgot" to="/forgot-password">Esqueci minha senha!</Link>
+            </div>
+        </Form>
+ 
         </Container>
     )
 }

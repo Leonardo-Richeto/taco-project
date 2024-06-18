@@ -1,32 +1,107 @@
 import { styled } from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
-    width: 70%;
+    width: 85%;
     margin: auto;
     min-height: 100vh;
     position: relative;
     padding-bottom: 100px;
+    font-size: 1rem;
 
-    >.section-inputs {
+    .unfixed{
+        opacity: 0.6;
+    }
+
+    .diet-span{
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        max-height: 10vh;
-        padding-bottom: 36px;
-        border-bottom: 1px solid ${({ theme }) => theme.GRAY_300};
+        justify-content: space-evenly;
+        width: 55%;
+        margin: 1.375rem auto 0 auto;
 
-        .search-div{
-            display: flex;
-            width: 35%;
-            margin: 24px auto;
+        input{
+            background: ${({ theme }) => theme.TERTIARY_BACKGROUND};
+            border: none;
+            border-radius: 5px;
+            width: 60%;
+            height: 38px;
+            text-align: center;
+            color: ${({ theme }) => theme.TEXT_COLOR};
+            padding: 0 6px;
         }
     }
 
-    .section-cards {
+    .diet-name{
+        font-weight: 400;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .save-delete-buttons{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .save-button{
+        background: #2E8B57;
+    }
+
+    .delete-button{
+        background: #FF4136;
+    }
+
+    .save-button, .delete-button{
+        display: flex;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        border: 1px solid ${({ theme }) => theme.ALTERNATIVE_COLOR};
+        color: #FFFFFF;
+        padding: 0 16px;
+        height: 2.2rem;
+        align-items: center;
+
+        >svg{
+            min-width: 26px;
+            min-height: 26px;
+            margin: auto;
+        }
+    }
+
+    .section-inputs {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-bottom: 1px solid ${({ theme }) => theme.GRAY_300};
+        
+        >div:first-child{
+            margin: 1.5rem 0;
+            width: 40%;
+        }
+    }
+
+    .section-cards{
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        gap: 1.5rem;
+        overflow-y: scroll;
+        max-height: 80vh;
+        margin-top: .7rem;
+        padding: .7rem;
+
+        scrollbar-color: red;
+    }
+
+    .section-cards::-webkit-scrollbar{
+        background: ${({ theme }) => theme.PRIMARY_BACKGROUND};
+        border-radius: 10px;
+        width: .5rem;
+    }
+
+    .section-cards::-webkit-scrollbar-thumb {
+        background: ${({ theme }) => theme.TERTIARY_BACKGROUND};
+        border-radius: 10px;
     }
 
     .card:hover, .selected-food:hover{
@@ -34,30 +109,63 @@ export const Container = styled.div`
         transition: background-color 0.3s ease;
     }
 
-    @media screen and (max-width:1600px) {
+    @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+
         .section-cards{
             grid-template-columns: repeat(2, 1fr);
         }
     }
 
-    @media screen and (max-width:1150px) {
-        width: 90%;
+    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+        width: 93%;
 
         .section-cards{
             grid-template-columns: repeat(1, 1fr);
         }
-    }
 
-    @media screen and (max-width:800px) {
-        font-size: 12px;
-    }
+        .section-inputs{
+            justify-content: space-between;
 
-    @media screen and (max-width:600px) {
-        width: 95%;
-
-        >.section-cards{
-            grid-template-columns: repeat(1, 1fr);
+            div:first-child{
+                width: 50%;
+            }
         }
+    }
+`
 
-}
+export const NewDietButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    height: 3.5rem;
+    margin: 2rem auto;
+    font-size: 1.375rem;
+    border: 2px dashed ${({ theme }) => theme.TEXT_COLOR};
+    color: ${({ theme }) => theme.TEXT_COLOR};
+    border-radius: 10px;
+    background: ${({ theme }) => theme.TERTIARY_BACKGROUND};
+
+    p{
+        display: flex;
+        
+        svg{
+            width: 1.75rem;
+            height: 1.75rem;
+            margin: auto 12px;
+        }
+    }
+
+    p:hover{
+        transition: 0.5s;
+        opacity: 0.8;
+    }
+    
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+        width: 40%;
+    }
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+        width: 60%;
+    }
 `

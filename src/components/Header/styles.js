@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.header`
     width: 100%;
-    min-height: 68px;
+    min-height: 4.25rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,50 +18,94 @@ export const Container = styled.header`
     
         ul{
             display: flex;
+            align-items: center;
             list-style: none;
-            gap: 24px;
+            gap: 1.5rem;
             font-size: 1.5em;
 
             a{
                 color: ${({ theme }) => theme.TEXT_COLOR};
                 text-decoration: none;
+
+                svg{
+                    font-size: 1.75rem;
+                }
             }
         }
 
         >div{
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            width: 124px;
 
-            >svg, a{
-                background: transparent;
-                border: none;
+            .toggle-theme:hover{
+                filter: opacity(0.6);
+            }
+
+            .toggle-theme{
+                margin: auto 1.5rem;
                 color: ${({ theme }) => theme.TEXT_COLOR};
-                font-size: 1.5em;
+                font-size: 1.75em;
                 cursor: pointer;
             }
 
-            >svg:hover{
-                filter: brightness(0.6);
+            a{
+                font-size: 24px;
             }
         }
     }
 
-    @media screen and (max-width: 600px){
-        font-size: 12px;
-
+    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
         nav{
-            font-size: 14px;
-            
-            li{
-                margin: 0 12px;
-                cursor: pointer;
-            }
-
-            div{
-                margin: 0 12px;
+            ul{
+                gap: 2.5rem;
             }
         }
     }
+`
+
+export const Profile = styled.div`
+    display: flex;
+    align-items: center;
+
+    img{
+        width: 3rem;
+        height: 3rem;
+        margin: .2rem 1rem;
+        border-radius: 50%;
+        box-shadow: 1px 1px 5px 0 ${({ theme }) => theme.SHADOW};
+        object-fit: cover;
+    }
+
+    svg{
+        font-size: 2rem;
+        color: red;
+        cursor: pointer;
+    }
+
+    >div{
+        display: flex;
+        flex-direction: column;
+        line-height: 24px;
+
+        strong{
+            font-size: 18px;
+            color: ${({ theme }) => theme.TEXT_COLOR};
+        }
+
+        a:nth-child(2){
+            font-size: 14px;
+            filter: brightness(0.8);
+        }
+    }
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+        display: block;
+        text-align: center;
+        align-items: center;
+
+        .welcome{
+            display: none;
+        }
+    }
+
 `

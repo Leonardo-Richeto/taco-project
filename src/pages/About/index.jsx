@@ -23,7 +23,7 @@ export function About(){
 
                 <p className="warning"><strong>Ressalto que uma uma alimentação calculada por um profissional sempre será o melhor caminho!</strong></p>
 
-                <p><strong className="warning red">Todas as informações foram analisadas de alimentos crús ou preparados de forma específica, pois o preparo influencia totalmente no resultado final</strong>, para ver o conteúdo completo <a target="blank" href="https://www.cfn.org.br/wp-content/uploads/2017/03/taco_4_edicao_ampliada_e_revisada.pdf">clique aqui</a> para acessar o documento original da tabela TACO ou visite o site oficial do fabricante do alimento.</p>
+                <p><strong className="warning red">Todas as informações foram analisadas de alimentos crús ou preparados de forma específica, pois o preparo influencia totalmente no resultado final</strong>, <a target="blank" href="https://www.cfn.org.br/wp-content/uploads/2017/03/taco_4_edicao_ampliada_e_revisada.pdf">clique aqui</a> para acessar o documento original da tabela TACO ou visite o site oficial do fabricante do alimento.</p>
 
                 <p>Para ver como este projeto foi feito, acesse meu <a target="blank" href="https://github.com/Leonardo-Richeto">Github</a>.</p>
             </div>

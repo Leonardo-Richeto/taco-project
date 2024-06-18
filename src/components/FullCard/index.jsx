@@ -13,12 +13,12 @@ export function FullCard({ food, weight, rank, emphasis}){
                     if(key === emphasis){
                         return <ColoredNutrient key={key}>
                             <p>{replaceKey(key)}</p>
-                            <p>{calculateWeight(value, weight, verifyWeight(key))}</p>
+                            <p>{calculateWeight(value, weight)}<span>{verifyWeight(key)}</span></p>
                             </ColoredNutrient>;
                     }else{
                         return <Nutrient key={key}>
                             <p>{replaceKey(key)}</p>
-                            <p>{calculateWeight(value, weight, verifyWeight(key))}</p>
+                            <p>{calculateWeight(value, weight)}<span>{verifyWeight(key)}</span></p>
                         </Nutrient>;
                     }
                 })}

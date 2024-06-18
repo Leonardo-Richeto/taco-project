@@ -1,32 +1,39 @@
-export const typeOfWeight = {
-    grams: 'g',
-    milligrams: 'mg',
-    none: ''
+const exceptions = ['NA', '*', 'Tr']
+
+export function editSelectedFood(selectedFood, weight){
+  const editedFood = {...selectedFood, amount: weight}
+
+  editedFood.proteina = calculateWeight(selectedFood.proteina, weight)
+  editedFood.carboidrato = calculateWeight(selectedFood.carboidrato, weight)
+  editedFood.gordura = calculateWeight(selectedFood.gordura, weight)
+  editedFood.fibra = calculateWeight(selectedFood.fibra, weight)
+  editedFood.kcal = calculateWeight(selectedFood.kcal, weight)
+  
+  return editedFood
 }
 
-export function calculateWeight(value, weight, typeOfWeight){
-    if(value.includes(',')){
-      const result = parseFloat((value.replace(',', '.')) / 100) * weight
-      
-      return typeOfWeight === 'g' ? `${result.toFixed(1).toString().replace('.', ',')} ${typeOfWeight}` : `${result.toFixed(2).toString().replace('.', ',')} ${typeOfWeight}`
-    }else{
-      const result = (parseFloat(value) / 100) * weight
-      
-      if(!isNaN(result)){
-        return typeOfWeight === 'g' || typeOfWeight === '' ? `${result.toFixed(1).toString().replace('.', ',')} ${typeOfWeight}` : `${result.toFixed(2).toString().replace('.', ',')} ${typeOfWeight}`
-      }else{
-        return value
-      }
-    }
+export function calculateWeight(value, weight){
+  if(typeof value === 'number') return value
+
+  if(exceptions.includes(value)){
+    const formattedValue = 0
+
+    return formattedValue.toFixed(1)
+  }
+
+  const number = parseFloat(value.replace(',', '.'))
+
+  const result = (number / 100) * weight
+
+  return result.toFixed(1)
 }
 
 export function editedCalculation(value){
-    if(value.includes(',')){
-      return parseFloat(value.replace(',', '.'))
+  if(typeof value === 'number') return Number(value.toFixed(1))
 
-    }else{
-      const result = parseFloat(value)
-      
-      return !isNaN(result) ? result : 0
-    }
+  if(exceptions.includes(value)) return 0
+
+  const result = parseFloat(value.replace(',', '.'))
+
+  return Number(result)
 }

@@ -1,27 +1,16 @@
 //import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { ThemeProvider } from 'styled-components'
-import GlobalStyle from './styles/global'
-import { lightTheme, darkTheme } from './styles/themes'
 import { Routes } from './routes'
-import { useContext } from 'react'
-import { GlobalContext, GlobalProvider } from './context/GlobalContext'
-
-function Main(){
-  const { colorTheme } = useContext(GlobalContext)
-
-  const theme = colorTheme === 'light' ? lightTheme : darkTheme
-
-  return(
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-        <Routes />
-    </ThemeProvider>
-  )
-}
+import { GlobalProvider } from './context/GlobalContext'
+import { AuthProvider } from './context/AuthContext'
+import { ColorProvider } from './context/ColorContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <GlobalProvider>
-    <Main />
+    <ColorProvider>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </ColorProvider>
   </GlobalProvider>
 )

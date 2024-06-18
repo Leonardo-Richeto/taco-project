@@ -1,22 +1,32 @@
 /* eslint-disable react/prop-types */
-import { Container } from "./styles";
+import { Container, Profile } from "./styles";
 
-import { FaRegUserCircle } from "react-icons/fa";
 import { LuSunMoon } from "react-icons/lu";
 import { IoHomeOutline } from "react-icons/io5";
 import { BsTrophy } from "react-icons/bs";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import { FiUser } from "react-icons/fi"
+import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 
 import { Link } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
+import { ColorContext } from "../../context/ColorContext";
+import { api } from "../.././service/api"
+import { useAuth } from "../../context/AuthContext";
+
 
 export function Header(){
-    const {colorTheme, setColorTheme} = useContext(GlobalContext)
-    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
+    const { user } = useAuth()
+    const { colorTheme, setColorTheme } = useContext(ColorContext)
+
+    const [avatar, setAvatar] = useState()
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600)
 
     function toggleTheme(){
-        setColorTheme(colorTheme === 'light' ? 'dark' : 'light')
+        const newTheme = colorTheme === 'light' ? 'dark' : 'light'
+
+        setColorTheme(newTheme)
+        localStorage.setItem("@infonutri:colorTheme", newTheme)
     }
 
     useEffect(() => {
@@ -27,21 +37,57 @@ export function Header(){
         window.addEventListener('resize', handleResize());
 
       },[window.innerWidth])
-      
+
+      useEffect(() => {
+        if(user){
+            const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
+            setAvatar(avatarUrl)            
+        }
+      }, [user])
+
     return(
         <Container>
             <nav>
                 <ul>
-                    <li><Link to="/">{ isSmallScreen ? <IoHomeOutline /> : 'Inicio'}</Link></li>
+                    <li><Link to="/" >{ isSmallScreen ? <IoHomeOutline /> : 'Inicio'}</Link></li>
                     <li><Link to="/ranking">{ isSmallScreen ? <BsTrophy /> : 'Ranking'}</Link></li>
                     <li><Link to="/about">{ isSmallScreen ? <IoIosInformationCircleOutline /> : 'Sobre'}</Link></li>
                 </ul>
+                
                 <div>
-                    <LuSunMoon onClick={toggleTheme}/>
+                    <LuSunMoon
+                    onClick={toggleTheme}
+                    className="toggle-theme"
+                    />
                     
-                    <Link to="/login">
-                        <FaRegUserCircle />
-                    </Link>
+                    {
+                        user
+                        ?
+                        <Profile>
+                                <Link to="/profile">
+                                    {
+                                        user
+                                        ? 
+                                        <img src={avatar}
+                                        alt="Foto do usuário"
+                                        />
+                                        :
+                                        <FiUser />
+                                    }
+                                </Link>
+        
+                            <div className="user">
+                                <Link to="/profile" className="welcome">
+                                    <strong>{`Olá, ${user.name}`}</strong>
+                                </Link>
+                                <Link to="/diets">Minhas dietas</Link>
+                            </div>
+                        </Profile>
+                        :
+                        <Link to="/login">
+                            <FiUser />
+                        </Link>
+                    }
                 </div>
             </nav>
         </Container>

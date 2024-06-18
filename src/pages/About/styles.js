@@ -1,7 +1,8 @@
 import { styled } from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
-    width: 70%;
+    width: 85%;
     margin: auto;
     min-height: 100vh;
     position: relative;
@@ -35,15 +36,17 @@ export const Container = styled.div`
         }
     }
 
-    @media screen and (max-width:800px) {
-        width: 95%;
-        
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+        .about{
+            width: 90%;
+        }
+    }
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+        width: 93%;
+
         .about{
             width: 100%;
-
-            >h1{
-                font-size: 24px;
-            }
         }
     }
 `

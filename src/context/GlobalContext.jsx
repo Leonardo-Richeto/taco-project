@@ -1,60 +1,43 @@
-import { createContext, useState } from "react";
-import { taco } from "../assets/taco";
-import { editDietFood } from "../utils/formatting";
-import { MdDeleteForever } from "react-icons/md"
+import { createContext, useCallback, useState } from "react";
 
 export const GlobalContext = createContext()
 
-export const GlobalProvider = ({ children }) => {
-    const [colorTheme, setColorTheme] = useState('light')
+export function GlobalProvider({ children }){
     const [weight, setWeight] = useState(100)
     const [search, setSearch] = useState([])
     const [input, setInput] = useState('')
-    const [addedFood, setAddedFood] = useState([])
-    const [total, setTotal] = useState({
-        totalWeight: 0,
-        totalProtein: 0,
-        totalCarbohydrate: 0,
-        totalFat: 0,
-        totalFiber: 0,
-        totalKcal: 0,
-      })
-
-    function handleAddFood(e){
-        if(e.type === 'button'){
-            e.innerText = 'Adicionado'
-        }
-        
-        
-        const selectedFood = taco.find(food => {
-          return food.id === e.id
-        })
-        const isFoodAlreadyAdded = addedFood.some(item => item.id === selectedFood.id)
-    
-        if (!isFoodAlreadyAdded && addedFood.length < 5) {
-          setAddedFood((prevFood) => [...prevFood, editDietFood(selectedFood, weight)])
-        }
-      }
+    const [mealFocus, setMealFocus] = useState(0)
+    const [arrayDiets, setArrayDiets] = useState([])
+    const [diet, setDiet] = useState({
+      diet_id: null,
+      dietName: "Nome da dieta",
+      meals: [{
+        mealName: "Refeição 1",
+        foods: []
+      }]
+    })
+    const [updatePage, setUpdatePage] = useState(true)
 
     return(
         <GlobalContext.Provider value={{
-            colorTheme,
-            setColorTheme,
             weight,
             setWeight,
             search,
             setSearch,
             input,
             setInput,
-            addedFood,
-            setAddedFood,
-            handleAddFood,
-            total,
-            setTotal
+            mealFocus,
+            setMealFocus,
+            arrayDiets,
+            setArrayDiets,
+            diet,
+            setDiet,
+            updatePage,
+            setUpdatePage
             }}
             >
 
-            {children}
+            { children }
             
         </GlobalContext.Provider>
     )

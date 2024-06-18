@@ -1,98 +1,80 @@
+import backgroundImg from "../../assets/register-background.jpg"
 import { styled } from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
-    width: 70%;
+    width: 100%;
     margin: auto;
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 100px;
+    height: 100vh;
+    display: flex;
+    align-items: stretch;
+`
 
-    >section{
-        display: flex;
-        width: 100%;
-        min-height: 70vh;
-        margin: 32px auto;
-        justify-content: space-between;
+export const Form = styled.form`
+    width: 40%;
+    height: 100vh;
+    background: ${({ theme }) => theme.SECONDARY_BACKGROUND};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
 
-        .user{
-            font-size: 4em;
-            padding: 2px;
-            border-radius: 50%;
-            border: 2px solid ${({ theme }) => theme.TEXT_COLOR};
-        }
+    div{
+        margin: 0;
+        width: 70%;
+    }
 
-        button{
+    .user{
+        font-size: 4em;
+        padding: 2px;
+        border-radius: 50%;
+        border: 2px solid ${({ theme }) => theme.TEXT_COLOR};
+    }
+    
+    button{
             background: #FFA500;
             padding: 12px;
-            width: 60%;
+            width: 40%;
             font-size: 16px;
             border-radius: 25px;
-        }
+    }
 
-        >div{
-            background: ${({ theme }) => theme.SECONDARY_BACKGROUND};
-            padding: 14px;
-            border-radius: 15px;
-            box-shadow: 1px 1px 5px 0 ${({ theme }) => theme.SHADOW};
-            width: 47%;
-            height: 85%;
-            margin: auto 0;
+    a{
+        color: ${({ theme }) => theme.TEXT_COLOR};
+        cursor: pointer;
+    }
 
-            div{
-                margin: 24px 0;
-            }
-        }
+    a:hover{
+        filter: opacity(0.8);
+    }
 
-        a{
-            color: ${({ theme }) => theme.TEXT_COLOR};
-            cursor: pointer;
-        }
+    .login{
+        margin-top: 58px;
 
-        a:hover{
-            filter: opacity(0.8);
-        }
-
-        .info{
-            margin: 38px;
-            width: auto;
-
-            p{
-                margin: 8px 0;
-            }
-
-            svg{
-                margin-top: 24px;
-                font-size: 5em;
-            }
+        p{
+            opacity: 0.6;
         }
     }
 
-    @media screen and (max-width: 980px){
-        width: 95%;
-        
-        >section{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 18px;
-            height: 100vh;
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+        width: 70%;
+        margin: auto;
+    }
 
-            >div{
-                width: 90%;
-                margin: auto;
-                
-                h1{
-                    font-size: 24px;
-                }
+    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+        width: 90%;
+    }
+`
 
-                form, .info{
-                    font-size: 12px;
-                }
-            }    
+export const Background = styled.div`
+    flex: 1;
+    background: url(${backgroundImg}) no-repeat center center;
+    background-size: cover;
+    filter: brightness(75%);
 
-            button{
-                margin: 24px 0;
-            }
-        }
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+        display: none;
     }
 `

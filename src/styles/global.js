@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { DEVICE_BREAKPOINTS } from './deviceBreakpoints';
 
 export default createGlobalStyle`
     * {
@@ -10,21 +11,40 @@ export default createGlobalStyle`
     :root{
         background-color: ${({ theme }) => theme.PRIMARY_BACKGROUND};
         color: ${({ theme }) => theme.TEXT_COLOR};
+        font-size: 16px;
+
+        @media (max-width: ${DEVICE_BREAKPOINTS.XS}){
+            font-size: 12px;
+        }
+
+        @media (max-width: ${DEVICE_BREAKPOINTS.XL}){
+            font-size: 14px;
+        }
     }
 
-    body, input {
+    body{
         font-family: 'Open Sans', sans-serif;
-        font-size: 16px;
+
+        >div{
+            min-width: 300px;
+        }
+    }
+
+    input{
+        font-family: 'Open Sans', sans-serif;
         outline: none;
+        font-size: 1.125rem;
     }
 
     h1{
         text-align: center;
-        margin-top: 28px;
-        font-size: 2.5em;
+        margin-top: 1rem;
+        font-size: 2.5rem;
     }
 
-    a {
+    a{
+        color: ${({ theme }) => theme.TEXT_COLOR};
+        cursor: pointer;
         text-decoration: none;
     }
 

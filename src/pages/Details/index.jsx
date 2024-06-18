@@ -6,10 +6,8 @@ import { Footer } from "../../components/Footer";
 import { Subtitle } from "../../components/Subtitle";
 import { FullCard } from "../../components/FullCard";
 
-import { handleVerifyWeight, handleKeyDown } from "../../utils/formatting";
 import { taco } from '../../assets/taco.js'
 
-import { GiWeight } from "react-icons/gi"
 import { FaArrowLeftLong } from "react-icons/fa6";
 
 import { useParams, Link } from "react-router-dom";
@@ -17,15 +15,9 @@ import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 export function Details(){
-    const { weight, setWeight } = useContext(GlobalContext)
+    const { weight } = useContext(GlobalContext)
     
     const { id } = useParams()
-
-    function handleChangeWeight(e){
-        const result = handleVerifyWeight(e)
-        
-        setWeight(result)
-        }
 
     function showDetails(id){
         const food = taco.find(food => {
@@ -39,19 +31,15 @@ export function Details(){
 
             <Header />
 
-            <h1>CONSULTA NUTRICIONAL</h1>
+            <h1>Detalhes</h1>
 
-            <Section className="input">
+            <Section className="inputs">
 
                 <Link to={"/"}>
                     <FaArrowLeftLong /> Voltar
                 </Link>
 
-                <InputWeight
-                classe="amount-input"
-                onKeyDown={e => handleKeyDown(e)}
-                onChange={e => handleChangeWeight(e)}
-                />
+                <InputWeight />
 
             </Section>
 

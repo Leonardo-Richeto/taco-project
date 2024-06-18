@@ -5,10 +5,10 @@ export const Container = styled.div`
     border-radius: 10px;
     margin: auto;
     width: 100%;
-    overflow: hidden;
-    padding: 8px 18px;
+    padding: .5rem 1.125rem;
     box-shadow: 1px 1px 5px 0 ${({ theme }) => theme.SHADOW};
- 
+    overflow: hidden;
+    
     >div {
         text-align: center;
         border-bottom: 1px solid ${({ theme }) => theme.BORDER_GRAY};
@@ -23,6 +23,14 @@ export const Container = styled.div`
         div {
             text-align: left;
             margin: 28px 2px;
+            overflow: hidden;
+        }
+
+        div:not(:nth-child(5)){
+            p:last-child::after{
+                content: 'g';
+                opacity: 0.6;
+            }
         }
 
         p:first-child{
@@ -31,7 +39,6 @@ export const Container = styled.div`
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            
         }
     }
 
@@ -45,20 +52,5 @@ export const Container = styled.div`
             font-size: 12px;
         }
 
-        svg{
-            margin: auto;
-        }
-    }
-    @media screen and (max-width:1150px) {
-        width: 70%;
-    }
-
-    @media screen and (max-width: 900px){
-        width: 90%;
-        font-size: 14px;
-    }
-
-    @media screen and (max-width: 600px){
-        width: 100%;
     }
 `

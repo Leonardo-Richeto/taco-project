@@ -12,8 +12,7 @@ export const Container = styled.div`
     box-shadow: 1px 1px 5px 0 ${({ theme }) => theme.SHADOW};
     
     >input {
-        height: 56px;
-        min-width: 36px;
+        height: 3.5rem;
         width: 100%;
         padding-right: 6px;
         text-align: left;
@@ -32,26 +31,21 @@ export const Container = styled.div`
     }
 
     >svg {
-        margin: 0 16px;
-        min-width: 22px;
-        min-height: 22px;
+        margin: 0 1rem;
+        min-width: 1.375rem;
+        min-height: 1.375rem;
     }
 
     >p{
-        margin-right: 16px;
+        margin-right: 1rem;
     }
 
-    @media screen and (max-width:800px) {
-        height: 36px;
-        
-        input{
-            font-size: 14px; 
-        }
-        
-        svg{
-            margin: 0 8px;
-            min-width: 14px;
-            min-height: 14px;
-        }
+
+    input[type="search"]::-webkit-search-cancel-button{
+        -webkit-appearance: none;
+        height: 2rem;
+        width: 2rem;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23AAA'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+        cursor: pointer;
     }
 `

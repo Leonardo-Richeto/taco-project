@@ -1,46 +1,51 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
-    width: 70%;
+    width: 85%;
     margin: auto;
     min-height: 100vh;
     position: relative;
     padding-bottom: 100px;
 
-    >span, button{
+    >button{
         display: flex;
         margin: auto;
         align-items: center;
         justify-content: center;
     }
 
-    >.section-select {
+    .section-select {
         width: 70%;
-        margin: auto;
+        margin: 1rem auto;
         display: flex;
         align-items: center;
+        justify-content: space-around;
 
-        >select{
-            border: ${({ theme }) => theme.BORDER_COLOR};
-            border-radius: 5px;
-            margin: 0 6px;
-            background: aliceblue;
+        >span{
+            display: flex;
+            
+            >select{
+                border: ${({ theme }) => theme.BORDER_COLOR};
+                border-radius: 5px;
+                margin: 0 6px;
+                background: aliceblue;
+                height: 1.375rem;
+            }
         }
     }
 
-    @media screen and (max-width: 800px){
-        width: 95%;
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+        width: 93%;
 
         .section-select{
-            display: block;
-            margin: 18px auto;
-        }
-
-    }
-
-    @media screen and (max-width: 600px){
-        h1{
-            font-size: 24px;
+            width: 100%;
         }
     }
 `

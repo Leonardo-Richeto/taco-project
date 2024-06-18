@@ -21,6 +21,10 @@ export const Form = styled.form`
     align-items: center;
     text-align: center;
     gap: 32px;
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid ${({ theme }) => theme.BORDER_COLOR};
+    box-shadow: 1px 1px 5px 0 ${({ theme }) => theme.SHADOW};
 
     div{
         margin: 0;
@@ -65,16 +69,5 @@ export const Form = styled.form`
 
     @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
         width: 90%;
-    }
-`
-
-export const Background = styled.div`
-    flex: 1;
-    background: url(${backgroundImg}) no-repeat center center;
-    background-size: cover;
-    filter: brightness(75%);
-
-    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-        display: none;
     }
 `

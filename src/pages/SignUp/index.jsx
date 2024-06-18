@@ -1,69 +1,121 @@
-import { Container } from "./styles";
+import { Container, Form, Background } from "./styles";
 import { InputText } from "../../components/InputText";
-import { Header } from "../../components/Header"
-import { Footer } from "../../components/Footer"
 import { Button } from "../../components/Button"
-import { Section } from "../../components/Section"
-import { TfiEmail } from "react-icons/tfi";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { MdOutlineAccountCircle } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { validateName, validateEmail, checkRepeat } from "../../utils/formatting";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { api } from "../../service/api"
+
+import { FiUser, FiMail, FiLock } from "react-icons/fi"
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { GiFruitBowl } from "react-icons/gi";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 export function SignUp(){
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const navigate = useNavigate()
+
+    async function handleSignUp(){
+        if(!name || !email || !password){
+            return toast.warn('Preencha todos os campos')
+        }
+
+        if(name.length < 5) return toast.warn("Informe seu nome completo.")
+        if(email.length < 10) return toast.warn("Informe seu email completo.")
+        if(password.length < 4) return toast.warn("A senha precisa ter pelo menos 4 caracteres.")
+
+        const nameRepeat = checkRepeat(name)
+        const emailRepeat = checkRepeat(email)
+        const passwordRepeat = checkRepeat(password)
+
+        if(nameRepeat && emailRepeat && passwordRepeat) return toast.error("Padrão de caracteres repetidos.")
+
+        const validName = validateName(name)
+        const validEmail = validateEmail(email)
+
+        if(!validName) return toast.warn("Use apenas letras nome.")
+        if(!validEmail) return toast.error("Este não é um email válido.")
+
+        try {
+            await api.post("/users", { name, email, password })
+            toast.success("Cadastrado efetuado com sucesso!")
+            navigate("/login")
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
+
+    function verifyEnter(e){
+        if(e.key === 'Enter') handleSignUp()
+    }
+
     return(
         <Container>
 
-            <Header />
+            <ToastContainer
+            position="bottom-right"
+            />
 
-            <Section>
+            <Form action="">
 
-                <div>
-                    <FaUser className="user" />
-                    <form action="">
-                        <InputText 
-                        icon={<MdOutlineAccountCircle />}
-                        type=""
-                        placeholder="Nome..."
-                        />
+                <h1>Criar conta</h1>
 
-                        <InputText 
-                        icon={<TfiEmail />}
-                        type="email"
-                        placeholder="E-mail..."
-                        />
+                <Link to="/" className="back">
+                    <FaArrowLeftLong /> Voltar ao início
+                </Link>
 
-                        <InputText 
-                        icon={<RiLockPasswordLine />}
-                        type="password"
-                        placeholder="Senha..."
-                        />
+                <FaUser className="user" />
+
+                <InputText 
+                icon={<FiUser />}
+                type="text"
+                placeholder="Nome..."
+                onChange={e => setName(e.target.value)}
+                required
+                onKeyPress={e => verifyEnter(e)}
+                autoFocus
+                />
+
+                <InputText 
+                icon={<FiMail />}
+                type="email"
+                placeholder="E-mail..."
+                onChange={e => setEmail(e.target.value)}
+                required
+                onKeyPress={e => verifyEnter(e)}
+                />
+
+                <InputText 
+                icon={<FiLock />}
+                type="password"
+                placeholder="Senha..."
+                onChange={e => setPassword(e.target.value)}
+                required
+                onKeyPress={e => verifyEnter(e)}
+                />
                     
-                    <Button 
-                    title="Criar conta"
-                    />
+                <Button 
+                title="Criar conta"
+                onClick={handleSignUp}
+                />
 
-                    </form>
+                <div className="login">
+                    <p>Já é membro ?</p>
+                    <Link to="/login">
+                        Faça o Login
+                    </Link>
                 </div>
+            </Form>
 
-                <div>
-                    <h1>Já faz parte?</h1>
+            <Background />
 
-                    <div className="info">
-                        <p>Membros podem configurar suas dietas.</p>
-                        <p>Veja sua alimentação em numeros.</p>
-                        <GiFruitBowl />
-                    </div>
-
-                <Link to="/login">Login</Link>
-
-                </div>
-
-            </Section>
-
-            <Footer />
-            
         </Container>
     )
 }

@@ -1,5 +1,3 @@
-import { calculateWeight, typeOfWeight } from "./calculations"
-
 export function replaceSpecialChars(str) {
     str = str.replace(/[ÀÁÂÃÄÅ]/g, "A")
     str = str.replace(/[àáâãäå]/g, "a")
@@ -95,7 +93,7 @@ export function verifyWeight(key){
     else return ''
 }
 
-export function handleKeyDown(e){
+export function handleVerifyNumber(e){
     const allowedKeys = [8, 37, 38, 39, 40, 44, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 110, 188, 190]
     
     if(!allowedKeys.includes(e.keyCode)) e.preventDefault()
@@ -107,14 +105,25 @@ export function handleVerifyWeight(e){
     return !isNaN(enteredWeight) ? enteredWeight : 0
 }
 
-export function editDietFood(selectedFood, weight){
-    const editedFood = {...selectedFood, amount: weight}
+export function validateName(string){
+    const regex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/
+    return regex.test(string)
+}
 
-    editedFood.proteina = calculateWeight(selectedFood.proteina, weight, typeOfWeight.grams)
-    editedFood.carboidrato = calculateWeight(selectedFood.carboidrato, weight, typeOfWeight.grams)
-    editedFood.gordura = calculateWeight(selectedFood.gordura, weight, typeOfWeight.grams)
-    editedFood.fibra = calculateWeight(selectedFood.fibra, weight, typeOfWeight.grams)
-    editedFood.kcal = calculateWeight(selectedFood.kcal, weight, typeOfWeight.none)
+export function validateEmail(email){
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return regex.test(email)
+}
 
-    return editedFood
-  }
+export function checkRepeat(string){
+    const regex = /(.)\1{2,}/;
+    return regex.test(string);
+}
+
+export function tips(input){
+    const string = replaceSpecialChars(input.toLowerCase())
+
+    if(string.includes('ovo')) return 'Um ovo médio tem aproximadamente 50g.'
+    if(string.includes('pao')) return 'Uma unidade de pão francês tem aproximadamente 50g.'
+    if(string.includes('frances')) return 'Uma unidade de pão francês tem aproximadamente 50g.'
+}
