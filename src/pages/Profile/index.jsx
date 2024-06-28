@@ -10,7 +10,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useState } from "react";
 import { checkRepeat, validateEmail, validateName } from "../../utils/formatting";
 
-import avatarPlaceHolder from '../../assets/avatar_placeholder.svg'
+import avatarPlaceHolder from '../../assets/user.svg'
 import { api } from '../../service/api'
 import { useAuth } from '../../context/AuthContext';
 import { toast } from "react-toastify";
@@ -51,7 +51,7 @@ export function Profile(){
 
         if(!validName) return toast.warn("Use apenas letras nome.")
         if(!validEmail) return toast.error("Este não é um email válido.")
-
+        
         const updatedUser = Object.assign(user, updatedInfo)
         try {
             await updateProfile(updatedUser, avatarFile)

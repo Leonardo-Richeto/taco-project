@@ -11,8 +11,8 @@ function AuthProvider({ children }){
             const response = await api.post("/sessions", { email, password })
             const { user, token } = response.data
 
-            localStorage.setItem("@infonutri:user", JSON.stringify(user))
-            localStorage.setItem("@infonutri:token", token)
+            localStorage.setItem("@autodieta:user", JSON.stringify(user))
+            localStorage.setItem("@autodieta:token", token)
 
             api.defaults.headers.authorization = `Bearer ${token}`
 
@@ -24,8 +24,8 @@ function AuthProvider({ children }){
 }
 
 function signOut(){
-    localStorage.removeItem("@infonutri:user")
-    localStorage.removeItem("@infonutri:token")
+    localStorage.removeItem("@autodieta:user")
+    localStorage.removeItem("@autodieta:token")
     
     setData({})
 }
@@ -40,7 +40,7 @@ async function updateProfile(user, avatarFile){
             user.avatar = response.data.avatar
         }
         await api.put("/users", user)
-        localStorage.setItem("@infonutri:user", JSON.stringify(user))
+        localStorage.setItem("@autodieta:user", JSON.stringify(user))
 
         setData({ user, token:data.token })
     } catch (error) {
@@ -49,8 +49,8 @@ async function updateProfile(user, avatarFile){
 }
 
 useEffect(() => {
-    const user = localStorage.getItem("@infonutri:user")
-    const token = localStorage.getItem("@infonutri:token")
+    const user = localStorage.getItem("@autodieta:user")
+    const token = localStorage.getItem("@autodieta:token")
 
     if(token && user){
         api.defaults.headers.common['authorization'] = `Bearer ${token}`

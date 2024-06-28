@@ -6,14 +6,13 @@ import { IoHomeOutline } from "react-icons/io5";
 import { BsTrophy } from "react-icons/bs";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FiUser } from "react-icons/fi"
-import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
+import avatarPlaceholder from '../../assets/user.svg'
 
 import { Link } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { ColorContext } from "../../context/ColorContext";
 import { api } from "../.././service/api"
 import { useAuth } from "../../context/AuthContext";
-
 
 export function Header(){
     const { user } = useAuth()
@@ -26,7 +25,7 @@ export function Header(){
         const newTheme = colorTheme === 'light' ? 'dark' : 'light'
 
         setColorTheme(newTheme)
-        localStorage.setItem("@infonutri:colorTheme", newTheme)
+        localStorage.setItem("@autodieta:colorTheme", newTheme)
     }
 
     useEffect(() => {

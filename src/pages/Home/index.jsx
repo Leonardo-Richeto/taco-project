@@ -66,6 +66,10 @@ function handleEditing(){
     }
 }
 
+function handleSearch(e){
+  if(e.key === 'Enter') setInput(e.target.value)
+}
+
 function handleNewMeal(){
   const lastMeal = diet.meals.length - 1
 
@@ -176,13 +180,14 @@ useEffect(() => {
 
     return terms.every(term => foodName.includes(term))
   })
-    setSearch(normalizedInput !== '' ? filteredFoods : [])
+    const limitedSearch = filteredFoods.slice(0, 30)
+    
+    setSearch(normalizedInput !== '' ? limitedSearch : [])
 
     if(searchInput.value === ''){
       searchInput.value = input
       setTipShown(false)
     } 
-
 },[input])
 
 useEffect(() => {
@@ -230,8 +235,6 @@ useEffect(() => {
 
     setTotalDiet(totalInfo)
 }, [diet])
-
-
 
   return(
     <Container>
@@ -323,7 +326,7 @@ useEffect(() => {
             type="search"
             className="search-input"
             placeholder="Pesquisar alimento..."
-            onChange={e => setInput(e.target.value)}
+            onKeyDown={e => handleSearch(e)}
             />
 
             <InputWeight />

@@ -11,9 +11,9 @@ import { createContext, useState, useEffect } from 'react'
 export const ColorContext = createContext()
 
 export function ColorProvider({ children }){
-    const userTheme = localStorage.getItem("@infonutri:colorTheme")
+    const userTheme = localStorage.getItem("@autodieta:colorTheme")
 
-    const [colorTheme, setColorTheme] = useState(userTheme ? userTheme : 'dark')
+    const [colorTheme, setColorTheme] = useState(userTheme ? userTheme : 'light')
     const [theme, setTheme] = useState(colorTheme === 'light' ? lightTheme : darkTheme)
     
     useEffect(() => {

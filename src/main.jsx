@@ -6,11 +6,12 @@ import { AuthProvider } from './context/AuthContext'
 import { ColorProvider } from './context/ColorContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <GlobalProvider>
-    <ColorProvider>
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
-    </ColorProvider>
-  </GlobalProvider>
+    <GlobalProvider>
+      <ColorProvider>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </ColorProvider>
+    </GlobalProvider>
+  
 )

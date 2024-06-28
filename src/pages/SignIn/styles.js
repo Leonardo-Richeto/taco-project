@@ -6,9 +6,6 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     align-items: stretch;
-
-    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-        }
 `
 
 export const Form = styled.form`
@@ -61,6 +58,10 @@ export const Form = styled.form`
     @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
         width: 70%;
         margin: auto;
+
+        div{
+            width: 90%;
+        }
     }
 
     @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {

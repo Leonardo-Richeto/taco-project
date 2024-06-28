@@ -61,6 +61,10 @@ export const Form = styled.form`
     @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
         width: 70%;
         margin: auto;
+
+        div{
+            width: 90%;
+        }
     }
 
     @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {

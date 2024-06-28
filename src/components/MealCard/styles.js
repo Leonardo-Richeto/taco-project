@@ -28,6 +28,10 @@ export const Container = styled.div`
         margin: 4px 0;
     }
 
+    article{
+        height: 2.5rem;
+    }
+
     >div{
         display: grid;
         grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr 0.3fr;
@@ -93,6 +97,10 @@ export const Container = styled.div`
             p{
                 margin: .2rem;
             }
+        }
+
+        article{
+            height: 48px;
         }
     }
 `

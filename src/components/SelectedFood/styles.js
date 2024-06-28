@@ -56,11 +56,6 @@ export const InitialAddFood = styled.article`
     align-items: center;
     justify-content: center;
     background: ${({ theme }) => theme.ALTERNATIVE_COLOR};
-    height: 2.5rem;
     border-top: 1px dashed ${({ theme }) => theme.TEXT_COLOR};
     border-bottom: 1px dashed ${({ theme }) => theme.TEXT_COLOR};
-
-    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-        height: 3rem;
-    }
 `

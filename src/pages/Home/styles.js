@@ -55,11 +55,12 @@ export const Container = styled.div`
         display: flex;
         font-size: 1.1rem;
         border-radius: 10px;
-        border: 1px solid ${({ theme }) => theme.ALTERNATIVE_COLOR};
+        border: 1px solid darkgray;
         color: #FFFFFF;
         padding: 0 16px;
-        height: 2.2rem;
+        height: 2.5rem;
         align-items: center;
+        box-shadow: 1px 1px 2px 0 ${({ theme }) => theme.SHADOW};
 
         >svg{
             min-width: 26px;
@@ -89,8 +90,6 @@ export const Container = styled.div`
         max-height: 80vh;
         margin-top: .7rem;
         padding: .7rem;
-
-        scrollbar-color: red;
     }
 
     .section-cards::-webkit-scrollbar{
@@ -112,7 +111,7 @@ export const Container = styled.div`
     @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
 
         .section-cards{
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
         }
     }
 
@@ -120,7 +119,7 @@ export const Container = styled.div`
         width: 93%;
 
         .section-cards{
-            grid-template-columns: repeat(1, 1fr);
+            grid-template-columns: 1fr;
         }
 
         .section-inputs{
@@ -162,10 +161,16 @@ export const NewDietButton = styled.button`
     }
     
     @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-        width: 40%;
+        width: 50%;
+
+        svg{
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: auto 6px;
+        }
     }
 
     @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-        width: 60%;
+        width: 70%;
     }
 `

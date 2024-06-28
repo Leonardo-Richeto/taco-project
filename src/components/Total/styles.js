@@ -9,6 +9,11 @@ export const Container = styled.div`
     border: 1px solid ${({ theme }) => theme.BORDER_COLOR};
     border-radius: 10px;
     margin: 24px 0;
+    box-shadow: 1px 1px 5px 0 ${({ theme }) => theme.SHADOW};
+
+    p{
+        border-right: 1px solid ${({ theme }) => theme.PRIMARY_BACKGROUND};
+    }
 
     p:nth-child(2){
         overflow: hidden;

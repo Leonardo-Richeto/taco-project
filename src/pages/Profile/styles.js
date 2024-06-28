@@ -93,6 +93,7 @@ export const Avatar = styled.div`
         border-radius: 50%;
         box-shadow: 1px 1px 5px 0 ${({ theme }) => theme.SHADOW};
         object-fit: cover;
+        background: lightgray;
     }
 
     >label {
