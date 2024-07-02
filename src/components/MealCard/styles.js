@@ -100,7 +100,7 @@ export const Container = styled.div`
         }
 
         article{
-            height: 48px;
+            height: 58px;
         }
     }
 `

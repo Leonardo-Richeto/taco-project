@@ -111,16 +111,12 @@ export const Container = styled.div`
     @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
 
         .section-cards{
-            grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+            grid-template-columns: 1fr;
         }
     }
 
     @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
         width: 93%;
-
-        .section-cards{
-            grid-template-columns: 1fr;
-        }
 
         .section-inputs{
             justify-content: space-between;
@@ -160,8 +156,8 @@ export const NewDietButton = styled.button`
         opacity: 0.8;
     }
     
-    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-        width: 50%;
+    @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+        width: 60%;
 
         svg{
             width: 1.5rem;
@@ -170,7 +166,7 @@ export const NewDietButton = styled.button`
         }
     }
 
-    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
         width: 70%;
     }
 `
