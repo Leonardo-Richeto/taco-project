@@ -1,6 +1,5 @@
 import { Container, Form, Background } from "./styles";
 import { InputText } from "../../components/InputText";
-import { Button } from "../../components/Button"
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -19,13 +18,12 @@ export function SignUp(){
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
 
     async function handleSignUp(){
-        if(!name || !email || !password){
-            return toast.warn('Preencha todos os campos')
-        }
+        if(!name || !email || !password) return toast.warn('Preencha todos os campos')
 
         if(name.length < 5) return toast.warn("Informe seu nome completo.")
         if(email.length < 10) return toast.warn("Informe seu email completo.")
@@ -43,12 +41,15 @@ export function SignUp(){
         if(!validName) return toast.warn("Use apenas letras nome.")
         if(!validEmail) return toast.error("Este não é um email válido.")
 
+        setLoading(true)
+        
         try {
             await api.post("/users", { name, email, password })
             toast.success("Cadastrado efetuado com sucesso!")
             navigate("/login")
         } catch (error) {
             toast.error(error.response.data.message)
+            setLoading(false)
         }
     }
 
@@ -101,10 +102,15 @@ export function SignUp(){
                 onKeyPress={e => verifyEnter(e)}
                 />
                     
-                <Button 
-                title="Criar conta"
+                <button
                 onClick={handleSignUp}
-                />
+                className={loading ? "button button-loading" : "button"}
+                disabled={loading}
+                >
+                    <p className="button-text">
+                        Criar conta
+                    </p>
+                </button>
 
                 <div className="login">
                     <p>Já é membro ?</p>

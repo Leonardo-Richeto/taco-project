@@ -24,15 +24,15 @@ export const Container = styled.div`
         padding: 1rem 0;
     }
 
-    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    @media (max-width: ${DEVICE_BREAKPOINTS.XL}) {
         >section{
-            grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
         }
     }
 
-    @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
+    @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
         >section{
-            grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
         }
     }
 

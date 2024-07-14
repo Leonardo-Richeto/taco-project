@@ -41,7 +41,7 @@ export const Container = styled.div`
         margin: auto;
     }
 
-    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
         width: 93%;
 
         .section-select{

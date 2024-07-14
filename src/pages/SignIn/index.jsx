@@ -1,6 +1,5 @@
 import { InputText } from "../../components/InputText";
 import { Container, Form,Background } from "./styles";
-import { Button } from "../../components/Button"
 import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../context/AuthContext";
@@ -16,18 +15,21 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 export function SignIn(){
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [loading, setLoading] = useState(false)
 
     const { signIn } = useAuth()
     const navigate = useNavigate()
 
     async function handleSignIn(){
         if(!email && !password) return toast.warn("Preencha todos os campos.")
+        setLoading(true)
 
         try {
             await signIn({ email, password })
             navigate("/")
         } catch (error) {
             toast.error(error.response.data.message)
+            setLoading(false)
         }
     }
 
@@ -44,7 +46,7 @@ export function SignIn(){
 
         <Background />
 
-        <Form action="">
+        <Form action="#">
 
             <h1>Login</h1>
             
@@ -72,10 +74,15 @@ export function SignIn(){
             onKeyPress={e => verifyEnter(e)}
             />
         
-            <Button
-            title="Entrar"
+            <button
             onClick={handleSignIn}
-            />
+            className={loading ? "button button-loading" : "button"}
+            disabled={loading}
+            >
+                <p className="button-text">
+                    Entrar
+                </p>
+            </button>
 
             <div className="links">
                 <Link className="register" to="/register">Criar Conta</Link>

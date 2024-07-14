@@ -33,12 +33,51 @@ export const Form = styled.form`
         border: 2px solid ${({ theme }) => theme.TEXT_COLOR};
     }
     
-    button{
-            background: #FFA500;
-            padding: 12px;
-            width: 40%;
-            font-size: 16px;
-            border-radius: 25px;
+    .button{
+        background: #FFA500;
+        padding: 12px;
+        width: 40%;
+        font-size: 16px;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .button-text {
+        transition: all 0.2s;
+    }
+
+    .button-loading .button-text {
+        visibility: hidden;
+        opacity: 0;
+        color: red;
+    }
+
+    .button-loading::after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        border: 4px solid transparent;
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: button-loading-spinner 1s ease infinite;
+    }
+
+    @keyframes button-loading-spinner{
+        from {
+            transform: rotate(0turn);
+        }
+
+        to {
+            transform: rotate(1turn);
+        }
     }
 
     a{

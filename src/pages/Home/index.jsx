@@ -274,7 +274,7 @@ useEffect(() => {
               >
 
                 {
-                meal.foods.length === 0 ? <InitialFood title="Adicione até 5 alimentos e monte uma refeição completa" /> 
+                meal.foods.length === 0 ? <InitialFood title="Os alimentos serão adicionados aqui" /> 
                   :
                 meal.foods.map((food, foodIndex) => (
                   <SelectedFood 

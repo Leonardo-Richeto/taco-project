@@ -3,7 +3,6 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { InputText } from "../../components/InputText";
-import { Button } from "../../components/Button"
 
 import { FiUser, FiMail, FiLock, FiCamera } from "react-icons/fi"
 import { FaArrowLeftLong } from "react-icons/fa6";
@@ -24,6 +23,7 @@ export function Profile(){
     const [email, setEmail] = useState(user.email)
     const [oldPassword, setOldPassword] = useState()
     const [newPassword, setNewPassword] = useState()
+    const [loading, setLoading] = useState(false)
 
     const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceHolder
 
@@ -53,11 +53,15 @@ export function Profile(){
         if(!validEmail) return toast.error("Este não é um email válido.")
         
         const updatedUser = Object.assign(user, updatedInfo)
+
+        setLoading(true)
         try {
             await updateProfile(updatedUser, avatarFile)
             toast.success("Perfil atualizado")
+            setLoading(false)
         } catch (error) {
             toast.error(error.response.data.message)
+            setLoading(false)
         }
     }
 
@@ -142,10 +146,15 @@ export function Profile(){
                 required
                 />
                     
-                <Button 
-                title="Atualizar"
+                <button
                 onClick={handleUpdate}
-                />
+                className={loading ? "button button-loading" : "button"}
+                disabled={loading}
+                >
+                    <p className="button-text">
+                        Atualizar perfil
+                    </p>
+                </button>
 
             </Form>
 
